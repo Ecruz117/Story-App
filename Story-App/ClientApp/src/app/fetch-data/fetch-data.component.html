@@ -1,0 +1,90 @@
+<div class="shadow">
+  <div class="container">
+    <div class="grid-container">
+      <div class="mainTitle">
+        <h1 class="toph">Newest Stories</h1>
+  
+        <p class = "topp">Data From HackerNews API</p>
+      </div>
+
+      
+     
+      
+      <div class="tableGrid">
+        
+       
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search For Story" [(ngModel)]="term">
+          </div>
+          <p class = "topp" *ngIf="!news"><em>Loading stories for story time...</em></p>
+        
+        <table class='news-table' aria-labelledby="tableLabel" *ngIf="news">
+          <thead>
+            <tr>
+              
+              <!-- <th>Url</th> -->
+              <th class="pagi">Select a story</th>
+              <!-- <th>Text</th> -->
+              <!-- <th>Id</th>
+              <th>By</th> -->
+            </tr>
+          </thead>
+        
+<select [(ngModel)]="selectedStory" size=10 class="select-selected">
+  <tr>
+    
+  </tr>
+  <option class="selectedOption" [ngValue]="item" *ngFor="let item of news | filter:term | paginate: { itemsPerPage: 10, currentPage: p }">
+    <ul>
+      <li>
+        {{ item.title }}
+        <hr>
+      </li>
+    </ul>
+   
+  </option>
+</select>
+
+          <tbody>
+            <!-- <tr *ngFor="let item of news | filter:term | paginate: { itemsPerPage: 10, currentPage: p }">
+              <ul>
+                <li>
+                  <a href="javascript:void(0)" (click)="tester()">{{ item.title }} </a>
+                </li> 
+              </ul>
+
+             
+              <td> {{item.text}} </td>
+            </tr> -->
+            
+            
+          </tbody>
+          <div class="pagi">
+            <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </table>
+       
+      </div>
+
+
+      <div class="content" >
+        <h1 class ="contentHeader">Title: {{selectedStory.title}}</h1>
+        <hr>
+        
+        <p>Story Content: {{selectedStory.text}}</p>
+        <hr>
+        <p>URL
+          <a href="{{selectedStory.url}}">{{selectedStory.url}}</a>
+        </p>
+        
+      </div>
+
+
+
+
+    </div>
+   
+  
+  </div>
+  
+</div>
